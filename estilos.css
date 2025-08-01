@@ -1,1 +1,201 @@
+/* Estilos generales y paleta de colores */
+:root {
+    --color-fondo: #FFF9F9;
+    --color-texto: #4B4B4B;
+    --color-ramo-base: #FDEBF7;
+    --color-ramo-hover: #FAD4E8;
+    --color-ramo-aprobado: #D4EDDA;
+    --color-ramo-bloqueado: #EEEEEE;
+    --color-borde: #E8C8E1;
+    --color-titulo: #D98CB3;
+    --color-notificacion-error: #E57373;
+    --color-notificacion-exito: #81C784;
+    --fuente-principal: 'Poppins', sans-serif;
+    --fuente-titulos: 'Playfair Display', serif;
+}
 
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    margin: 0;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Encabezado */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    border-bottom: 2px solid var(--color-borde);
+}
+
+.header h1 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-titulo);
+    font-size: 2.8em;
+    margin: 0;
+}
+
+.header p {
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+/* Contenedor principal de la malla */
+.malla-curricular {
+    display: flex;
+    flex-wrap: nowrap; /* Evita que los semestres se envuelvan */
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto; /* Permite el scroll horizontal en móviles */
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+}
+
+/* Estilos de cada columna de semestre */
+.semestre {
+    flex: 0 0 250px; /* Ancho fijo para cada semestre */
+    min-width: 250px; /* Ancho mínimo */
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-borde);
+}
+
+.semestre h2 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.5em;
+    color: var(--color-titulo);
+    text-align: center;
+    border-bottom: 2px solid var(--color-borde);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* Estilos de cada ramo */
+.ramo {
+    background-color: var(--color-ramo-base);
+    border: 1px solid var(--color-borde);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 12px;
+    font-size: 0.9em;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.ramo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(217, 140, 179, 0.2);
+    background-color: var(--color-ramo-hover);
+}
+
+/* Estado Aprobado */
+.ramo.aprobado {
+    background-color: var(--color-ramo-aprobado);
+    text-decoration: line-through;
+    text-decoration-color: #555;
+    text-decoration-thickness: 2px;
+    color: #555;
+    font-style: italic;
+    border-color: #a3d4ac;
+}
+
+/* Estado Bloqueado */
+.ramo.bloqueado {
+    background-color: var(--color-ramo-bloqueado);
+    color: #999;
+    cursor: not-allowed;
+    border-color: #ddd;
+}
+
+.ramo.bloqueado:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Hitos Importantes */
+.hitos-seccion {
+    text-align: center;
+    margin: 60px auto;
+    padding: 20px;
+    max-width: 900px;
+}
+.hitos-seccion h2 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-titulo);
+    font-size: 2em;
+}
+.hitos-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.hito {
+    background-color: #fff;
+    border: 2px solid var(--color-borde);
+    padding: 20px 30px;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.hito.obtenido {
+    background-color: var(--color-ramo-aprobado);
+    border-color: #a3d4ac;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Notificaciones */
+.notificacion {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    text-align: center;
+}
+.notificacion.visible {
+    opacity: 1;
+    visibility: visible;
+}
+.notificacion.error {
+    background-color: var(--color-notificacion-error);
+}
+.notificacion.exito {
+    background-color: var(--color-notificacion-exito);
+}
+
+
+/* Diseño Responsivo */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .header h1 {
+        font-size: 2em;
+    }
+    .malla-curricular {
+        padding: 10px 0; /* Menos padding lateral para que el scroll se sienta natural */
+    }
+    .semestre {
+        flex: 0 0 220px; /* Un poco más angosto en móviles */
+        padding: 15px;
+    }
+}
